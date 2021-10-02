@@ -1,2 +1,3 @@
 # Expense-App
-work in progress
+
+quick expense app
