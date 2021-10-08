@@ -1,31 +1,44 @@
-document.getElementById('add-expense').addEventListener('click', runEvent);
+class Expense {
+    constructor(item, date, price){
+        this.item = item;
+        this.date = date;
+        this.price = price;
+    }
+}
 
-function runEvent(e){
-    
-    const nameInput = document.getElementById('name-input').value
-    const addName = document.createTextNode(nameInput);
-    const addTdata1 = document.createElement('td');
-    addTdata1.appendChild(addName);
-  
-    const dateInput = document.getElementById('date-input').value
-    const addDate = document.createTextNode(dateInput);
-    const addTdata2 = document.createElement('td');
-    addTdata2.appendChild(addDate);
+class UI {
+    addExpenseToTable (expense){
+        const tbody = document.querySelector('tbody');
+        const trow = document.createElement('tr');
 
-    const amtInput = document.getElementById('number-input').value
-    const addAmt = document.createTextNode(amtInput);
-    const addTdata3 = document.createElement('td');
-    addTdata3.className = 'val';
-    addTdata3.innerHTML = '$';
-    addTdata3.appendChild(addAmt);
- 
-    const addTrow = document.createElement('tr');
-    addTrow.appendChild(addTdata1);
-    addTrow.appendChild(addTdata2);
-    addTrow.appendChild(addTdata3);
+        trow.innerHTML = `
+        <td>${expense.item}</td>
+        <td>${expense.date}</td>
+        <td>$ ${expense.price}</td>
+        `;
 
-    document.querySelector('tbody').appendChild(addTrow);
-};
+        tbody.appendChild(trow);
+    }
+}
 
+document.querySelector('button').addEventListener('click', function (e){
+    console.log('test')
+    const item = document.getElementById('purchased-item').value;
+    const date = document.getElementById('purchase-date').value;
+    const price = document.getElementById('purchase-price').value;
+
+    console.log(item)
+
+    const expense = new Expense(item, date, price);
+    console.log(expense)
+
+    const ui = new UI();
+
+    ui.addExpenseToTable(expense)
+
+    console.log(ui);
+
+    e.preventDefault()
+})
 
 
